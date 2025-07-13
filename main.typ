@@ -17,7 +17,8 @@ This article provides a brief introduction to *axiomatic quantum physics*, which
 
 First, we recall that a physical system is described by its state—a mathematical entity—and its time evolution, which is typically governed by a differential equation. In classical physics, the state is defined by generalized coordinates $q=(q_1,...,q_f)$ and their corresponding generalized momenta $p=(p_1,...,p_f)$. Then the time evolution is determined by *Hamilton function* and *Hamilton's canonical equation*.\
 We give the definition of the state of a quantum system as following axiom.
-#axiom[The *state* of a quantum system is represented by a unit vector (referred to as the *state vector*) in a complex Hilbert space $cal(H)$. For any state vector $psi in cal(H)$ and any non-zero complex number $alpha$, the vectors $psi$ and $alpha psi$ represent the same physical state.]
+#axiom[The *state* of a quantum system is represented by a unit vector (referred to as the *state vector*) in a complex Hilbert space $cal(H)$.
+  For any state vector $psi in cal(H)$ and any complex number $alpha$ with absolute value 1, the vectors $psi$ and $alpha psi$ represent the same physical state.]
 
 #axiom[Any observable physical quantity is represented by a self-adjoint operator on $cal(H)$.]
 
