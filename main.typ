@@ -33,6 +33,6 @@ Then we obtain the following useful thoerem.
   $E[T_psi]=integral_bb(R) lambda d P_T_psi (lambda)&=integral lambda d||E_T(B) psi||^2\
   &=integral_bb(R)lambda d angle.l E_T(B)psi,E_T(B)psi angle.r \
   &=integral_bb(R)lambda d angle.l psi,E_T(B)^2psi angle.r because E_T(B) "is self adjoint operator"\
-  &=integral_bb(R)d angle.l psi,lambda E_T(B)psi angle.r because E_T(B) "is idempotence oprerator"\
+  &=integral_bb(R)d angle.l psi,lambda E_T(B)psi angle.r because E_T(B) "is projection oprerator"\
   &=angle.l psi,T psi angle.r$
 ]
