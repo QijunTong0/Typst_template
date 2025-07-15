@@ -1,7 +1,18 @@
 #import "@preview/ctheorems:1.1.3": *
 #show: thmrules.with(qed-symbol: $square$)
 #set heading(numbering: "1.")
-= Axiomatic quantum physics
+
+#place(top + center, float: true, scope: "parent", text(1.4em, weight: "bold")[
+  Axiomatic quantum physics
+])
+
+#align(center)[
+  *Qijun Tong*
+  *Accenture Co.Ltd*
+]
+
+#set page(columns: 2)
+
 #let axiom = thmbox("axiom", "Axiom", fill: rgb("#CDE6C7"))
 #let theorem = thmbox("theorem", "Theorem", fill: rgb("#eeffee"))
 #let corollary = thmplain(
@@ -13,6 +24,7 @@
 #let definition = thmbox("definition", "Definition", inset: (x: 1.2em, top: 1em))
 
 #let proof = thmproof("proof", "Proof")
+= Introduction
 This article provides a brief introduction to *axiomatic quantum physics*, which is founded on three core axioms.
 
 First, we recall that a physical system is described by its state—a mathematical entity—and its time evolution, which is typically governed by a differential equation. In classical physics, the state is defined by generalized coordinates $q=(q_1,...,q_f)$ and their corresponding generalized momenta $p=(p_1,...,p_f)$. Then the time evolution is determined by *Hamilton function* and *Hamilton's canonical equation*.\
@@ -31,9 +43,12 @@ Then we obtain the following useful thoerem.
 #proof[
   Let $P_T_psi$ the probability distribution of $T_psi.$
 
-  $E[T_psi]=integral_bb(R) lambda d P_T_psi (lambda)&=integral lambda d||E_T(B) psi||^2\
+  $E[T_psi]=
+  &integral_bb(R) lambda d P_T_psi (lambda)\
+  &=integral lambda d||E_T(B) psi||^2\
   &=integral_bb(R)lambda d angle.l E_T(B)psi,E_T(B)psi angle.r \
-  &=integral_bb(R)lambda d angle.l psi,E_T(B)^2psi angle.r because E_T(B) "is self adjoint operator"\
-  &=integral_bb(R)d angle.l psi,lambda E_T(B)psi angle.r because E_T(B) "is projection oprerator"\
-  &=angle.l psi,T psi angle.r because E_T(B) "is spectral measure"$
+  &=integral_bb(R)lambda d angle.l psi,E_T(B)^2psi angle.r because "adjoint operator"\
+  &=integral_bb(R)d angle.l psi,lambda E_T(B)psi angle.r because "projection oprerator"\
+  &=angle.l psi,T psi angle.r because "spectral measure"$
 ]
+
