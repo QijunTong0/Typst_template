@@ -1,17 +1,26 @@
 #import "@preview/ctheorems:1.1.3": *
 #show: thmrules.with(qed-symbol: $square$)
 #set heading(numbering: "1.")
-
-#place(top + center, float: true, scope: "parent", text(1.4em, weight: "bold")[
-  Axiomatic quantum physics
+#set text(
+  font: "Meiryo UI",
+)
+#set page(paper: "a0", numbering: "1", columns: 2, margin: 4cm, header: align(
+  right,
+)[#text(24pt)[統計サマーセミナー2025年8月4日\@香川県]])
+#place(top + left, float: true, scope: "parent", text(72pt, weight: "bold", blue)[
+  Bernstein過程(reciprocal過程)とその推定について\
 ])
-
-#align(center)[
-  *Qijun Tong*
-  *Accenture Co.Ltd*
-]
-
-#set page(columns: 2)
+#place(top + left, float: true, scope: "parent", text(24pt, weight: "bold", blue)[
+  \
+])
+#place(top + right, float: true, scope: "parent", text(48pt, weight: "bold", blue)[
+  #text(48pt, black)[童 祺俊(Accenture株式会社)]\
+  #text(24pt, black)[※本発表内容は所属組織の見解を代表するものではありません]
+])
+#set text(
+  size: 36pt,
+  font: "Meiryo UI",
+)
 
 #let axiom = thmbox("axiom", "Axiom", fill: rgb("#CDE6C7"))
 #let theorem = thmbox("theorem", "Theorem", fill: rgb("#eeffee"))
@@ -21,34 +30,42 @@
   base: "theorem",
   titlefmt: strong,
 )
-#let definition = thmbox("definition", "Definition", inset: (x: 1.2em, top: 1em))
+#let definition = thmbox("definition", "定義", fill: rgb("#e3f9ff"))
+
+
 
 #let proof = thmproof("proof", "Proof")
-= Introduction
-This article provides a brief introduction to *axiomatic quantum physics*, which is founded on three core axioms.
-
-First, we recall that a physical system is described by its state—a mathematical entity—and its time evolution, which is typically governed by a differential equation. In classical physics, the state is defined by generalized coordinates $q=(q_1,...,q_f)$ and their corresponding generalized momenta $p=(p_1,...,p_f)$. Then the time evolution is determined by *Hamilton function* and *Hamilton's canonical equation*.\
-We give the definition of the state of a quantum system as following axiom.
-#axiom[The *state* of a quantum system is represented by a unit vector (referred to as the *state vector*) in a complex Hilbert space $cal(H)$.
-  For any state vector $psi in cal(H)$ and any complex number $alpha$ with absolute value 1, the vectors $psi$ and $alpha psi$ represent the same physical state.]
-
-#axiom[Any observable physical quantity is represented by a self-adjoint operator on $cal(H)$.]
-
-*Remark*: Self-adjoint operators are used because their eigenvalues, which correspond to the possible measurement outcomes of a physical quantity, are always real numbers. \
-An observable quantity $T$ of a state $psi in cal(H)$ in quantum physics is stochastic. Then we define a random variable $T_psi.$ Here we add an axiom for $T_psi$ on a probability space$(Omega,cal(B)(bb(R)),P).$
-#axiom[Let $B in cal(B)(bb(R))$, then $P(T_psi in B)=||E_T(B) psi||^2$, where $E_T$ is the spectral measure of $T$.
+#rect(fill: rgb("#ffdec4"), width: 100%, inset: 15pt, radius: 10pt)[
+  = #text(42pt)[Bernstein過程(reciprocal過程)]
 ]
-Then we obtain the following useful thoerem.
-#theorem[The expectation value of the random variable $T_psi$ is given by $E[T_psi] = angle.l psi, T psi angle.r$.]
-#proof[
-  Let $P_T_psi$ the probability distribution of $T_psi.$
+Bernstein過程(またはreciprocal process)とは通常の確率過程とは異なり、現在までの情報だけではなく未来からの情報の双方向によって特徴づけられる確率過程である
+#definition[${X_t}$を$a<=t<=b$で定義される確率過程とする.$X_t$がBernstein過程であるとは$cal(F)_s$:forward filteration,$cal(F)_t:$backword filterationに対して $P(X_t in A|cal(F)_t,cal(F)_s)=P(X_t in A|X_t,X_s)$を満たす確率過程である.]
+bernstein過程$X_t$の周辺分布は時刻$s$の初期分布と$t$の終端分布そして遷移確率カーネルによって定まる.
+#definition[${X_t}$]
+bernstein過程の周辺分布は対となる発展方程式によって記述される.
 
-  $E[T_psi]=
-  &integral_bb(R) lambda d P_T_psi (lambda)\
-  &=integral lambda d||E_T(B) psi||^2\
-  &=integral_bb(R)lambda d angle.l E_T(B)psi,E_T(B)psi angle.r \
-  &=integral_bb(R)lambda d angle.l psi,E_T(B)^2psi angle.r because "adjoint operator"\
-  &=integral_bb(R)d angle.l psi,lambda E_T(B)psi angle.r because "projection oprerator"\
-  &=angle.l psi,T psi angle.r because "spectral measure"$
+#rect(fill: rgb("#ffdec4"), width: 100%, inset: 15pt, radius: 10pt)[
+  = #text(42pt)[Schrödinger bridgeとエントロピー正則化最適輸送]
 ]
+Bernstein過程の定義の通り,一般にBernstein過程はマルコフ性を持たない。Bernstein過程かつマルコフ性を持つ確率過程はSchrödinger bridgeに帰着できることが知られている。
+Schrödinger bridgeはエントロピー正則化最適輸送と密接に関係し,その発展方程式の作用素は以下のシュレーディンガー方程式の解によって求まる.
+この解はエントロピー正則化最適輸送問題の双対問題の双対変数と一致する.
 
+#rect(fill: rgb("#ffdec4"), width: 100%, inset: 15pt, radius: 10pt)[
+  = #text(42pt)[Bernstein過程の応用]
+]
+== 複素行列値確率過程への拡張
+量子力学の文脈において、2対の発展方程式の作用素を複素行列値ハミルトニアンとその随伴$H,H^*$で表すことで、量子状態を記述するBernstein過程を構成することができる.
+#definition[パウリタイプのBernstein過程の密度関数は以下の発展で支配される.
+
+  $cases(
+    (diff eta(x, t))/(diff t)=H eta(x, t),
+    (diff eta^*(x,t))/(diff t)=H^* eta(x, t)
+  ),#text[境界条件] cases(eta(x, a)=kai(x), eta^*(x, b)=kai^*(x))$]
+== Schrödinger bridgeからのサンプリング
+Schrödinger bridgeからのサンプリングは以下のランジェバン方程式によって構成され、オイラー丸山法によってサンプリングが可能となる。
+== 平均場ニューラルネットワークによる軌道推定
+
+#rect(fill: rgb("#ffdec4"), width: 100%, inset: 15pt, radius: 10pt)[
+  = #text(42pt)[オープンプロブレム]
+]
