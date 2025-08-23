@@ -3,7 +3,7 @@ repos:
     hooks:
     -   id: typst-compile
         name: Compile Typst to PDF
-        entry: compile_typst.bat
-        language: system
+        entry: compile_typst.sh
+        language: python
         files: \.typ$
         stages: [commit]
