@@ -1,0 +1,9 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: typst-compile
+        name: Compile Typst to PDF
+        entry: compile_typst.bat
+        language: system
+        files: \.typ$
+        stages: [commit]

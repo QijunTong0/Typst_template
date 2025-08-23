@@ -39,3 +39,36 @@ git submodule update --init --recursive
 
 You can then begin writing your document by editing one of the sample files (`article_sample.typ`, `poster_sample.typ`, or `slide_sample.typ`) and interact with the integrated AI to assist you.
 
+## Development
+
+### Typst Setup
+
+To compile `.typ` files, you need to install the Typst command-line interface (CLI). You have two main options:
+
+1.  **Using Cargo:** If you have Rust and Cargo installed, you can install the CLI from source:
+    ```bash
+    cargo install --git https://github.com/typst/typst typst-cli
+    ```
+
+2.  **Pre-compiled Binaries:** You can download pre-compiled binaries for your operating system from the [official Typst releases page](https://github.com/typst/typst/releases).
+
+After installation, ensure that the `typst` executable is in your system's PATH.
+
+### Pre-commit Setup
+
+This repository is configured with a pre-commit hook that automatically compiles your `.typ` files into PDFs before each commit. To enable this feature, follow these steps:
+
+1.  **Install Python:** Make sure you have Python installed on your system.
+
+2.  **Install pre-commit:** Use pip, the Python package installer, to install the `pre-commit` framework:
+    ```bash
+    pip install pre-commit
+    ```
+
+3.  **Install the Git hooks:** In your repository, run the following command to set up the pre-commit hooks:
+    ```bash
+    pre-commit install
+    ```
+
+Now, whenever you commit changes to a `.typ` file, a corresponding PDF will be generated in the same directory.
+
