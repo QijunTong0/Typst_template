@@ -1,6 +1,3 @@
-[submodule "typst_src"]
-	path = typst_src
-	url = https://github.com/typst/typst.git
 [submodule "typst"]
 	path = typst
 	url = https://github.com/typst/typst.git
