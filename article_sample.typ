@@ -1,5 +1,9 @@
 #import "@preview/ctheorems:1.1.3": *
 #show: thmrules.with(qed-symbol: $square$)
+#set text(
+  //font: "Meiryo UI", #for japanese article
+  //font: "Hiragino Sans",
+)
 #set heading(numbering: "1.")
 = Axiomatic quantum physics
 #let axiom = thmbox("axiom", "Axiom", fill: rgb("#CDE6C7"))

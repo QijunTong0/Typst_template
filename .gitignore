@@ -1,2 +1,2 @@
 # Ignore generated PDF files
-*.pdf
+.DS_Store

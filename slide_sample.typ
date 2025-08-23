@@ -1,7 +1,8 @@
 #import "./templates/slide.typ": *
 #set text(
-  font: "Meiryo UI",
   size: 12pt,
+  //font: "Meiryo UI", #for japanese article
+  //font: "Hiragino Sans",
 )
 #show: slides.with(
   title: "Presentation Title",

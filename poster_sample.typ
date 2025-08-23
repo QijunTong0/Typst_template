@@ -7,9 +7,9 @@
 
 #set heading(numbering: none)
 #set text(
-  font: "Meiryo UI",
-  //font: "Hiragino Sans",
   size: 32pt,
+  //font: "Meiryo UI", #for japanese article
+  //font: "Hiragino Sans",
 )
 #set cite(style: "alphanumeric")
 
