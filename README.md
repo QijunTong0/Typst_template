@@ -52,6 +52,14 @@ cargo install typstyle
 ## 使用方法
 
 
+### 実行権限の付与
+
+最初に、スクリプトに実行権限を付与してください。
+
+```bash
+chmod +x ./format_compile.sh
+```
+
 ### フォーマットとコンパイル
 
 リポジトリには、フォーマットとコンパイルを一度に行うためのスクリプトが含まれています。
@@ -116,6 +124,14 @@ This will run `format_compile.sh` every time a `.typ` file is saved, automatical
 
 ## Usage
 
+
+### Granting Execution Permissions
+
+First, grant execution permissions to the script.
+
+```bash
+chmod +x ./format_compile.sh
+```
 
 ### Formatting and Compiling
 
