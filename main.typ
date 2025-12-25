@@ -1,4 +1,4 @@
-#import "./templates/article.typ": *
+#import "templates/article_en.typ": *
 #set text(cjk-latin-spacing: auto)
 // テンプレート関数を適用
 #show: project.with(
