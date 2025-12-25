@@ -1,0 +1,10 @@
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.typ$",
+                "cmd": "${workspaceFolder}/format_compile.sh ${file}"
+            }
+        ]
+    }
+}

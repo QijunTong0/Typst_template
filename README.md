@@ -1,74 +1,128 @@
-# Typst Template with AI Integration
+# 概要
 
-This repository provides a powerful authoring environment for the [Typst](https://typst.app/) typesetting system, enhanced with integrated AI assistance.
+Typstのテンプレートレポジトリです。
+テンプレートとなるいくつかのtypファイルと自動フォーマット機能を提供します。
 
-## AI-Powered Assistance
+**自動フォーマットではインライン数式の前後に自動でスペースを挿入するため手動でのスペーシング調整は不要になります**
 
-A key feature of this template is its deep integration with large language models (LLMs) to provide expert-level assistance for writing formal academic articles. The AI's knowledge base is built directly from the official Typst documentation, which is included as a submodule.
+## 環境構築
 
-By referencing the complete and up-to-date documentation, the AI can:
+このプロジェクトをビルドするには、[Typst](https://github.com/typst/typst) と [typstyle](https://github.com/typstyle-rs/typstylee) が必要です。
 
-*   **Provide Accurate Guidance:** Offer precise and reliable answers based on the official Typst tutorials, guides, and reference materials.
-*   **Avoid Hallucinations:** Significantly reduce the risk of generating incorrect or outdated code (e.g., LaTeX syntax) by grounding its responses in the official documentation. This is particularly helpful given the relative scarcity of Typst examples in public training data.
-*   **Accelerate Your Workflow:** Help you quickly find the right functions, understand complex syntax, and apply best practices for academic writing in Typst.
+お使いの環境に応じて、以下の方法でインストールしてください。
 
-This approach ensures that you receive high-quality, context-aware support, making your writing process faster and more efficient.
+### Typstのインストール
 
-## Templates
-
-This repository includes the following templates:
-
-*   **Article**: A standard template for academic papers.
-    *   Sample: `article_sample.typ`
-*   **Poster**: A template for creating conference posters.
-    *   Template: `templates/poster.typ`
-    *   Sample: `poster_sample.typ`
-*   **Slide**: A template for presentation slides.
-    *   Template: `templates/slide.typ`
-    *   Sample: `slide_sample.typ`
-
-## Getting Started
-
-To use this template, simply clone the repository and initialize the submodule to ensure the AI has access to the full documentation:
-
+**macOS (Homebrew):**
 ```bash
-git clone <repository-url>
-cd Typst_template
-git submodule update --init --recursive
+brew install typst
 ```
 
-You can then begin writing your document by editing one of the sample files (`article_sample.typ`, `poster_sample.typ`, or `slide_sample.typ`) and interact with the integrated AI to assist you.
+**Windows (Winget):**
+```bash
+winget install --id Typst.Typst
+```
 
-## Development
+**Linux (Snap):**
+```bash
+snap install typst
+```
 
-### Typst Setup
+または、[GitHubリリースページ](https://github.com/typst/typst/releases)からバイナリをダウンロードすることもできます。
 
-To compile `.typ` files, you need to install the Typst command-line interface (CLI). You have two main options:
+### typstyleのインストール
 
-1.  **Using Cargo:** If you have Rust and Cargo installed, you can install the CLI from source:
-    ```bash
-    cargo install --git https://github.com/typst/typst typst-cli
-    ```
+**macOS (Homebrew):**
+```bash
+brew install typstyle
+```
 
-2.  **Pre-compiled Binaries:** You can download pre-compiled binaries for your operating system from the [official Typst releases page](https://github.com/typst/typst/releases).
+**Cargo (Rust toolchain):**
+```bash
+cargo install typstyle
+```
 
-After installation, ensure that the `typst` executable is in your system's PATH.
+### VS Codeの推奨設定
 
-### Pre-commit Setup
+[Visual Studio Code](https://code.microsoft.com/) をお使いの場合、拡張機能 [Run on Save](https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave) をインストールすることで、ファイルを保存するたびに自動でフォーマットとコンパイルを実行できます。
 
-This repository is configured with a pre-commit hook that automatically compiles your `.typ` files into PDFs before each commit. To enable this feature, follow these steps:
+1.  VS Codeで `Run on Save` 拡張機能 (ID: `emeraldwalk.RunOnSave`) をインストールします。
+これにより、`.typ` ファイルを保存するたびに `format_compile.sh` が実行され、自動でPDFが更新されます。
 
-1.  **Install Python:** Make sure you have Python installed on your system.
+## 使用方法
 
-2.  **Install pre-commit:** Use pip, the Python package installer, to install the `pre-commit` framework:
-    ```bash
-    pip install pre-commit
-    ```
 
-3.  **Install the Git hooks:** In your repository, run the following command to set up the pre-commit hooks:
-    ```bash
-    pre-commit install
-    ```
+### フォーマットとコンパイル
 
-Now, whenever you commit changes to a `.typ` file, a corresponding PDF will be generated in the same directory.
+リポジトリには、フォーマットとコンパイルを一度に行うためのスクリプトが含まれています。
 
+```bash
+./format_compile.sh main.typ
+```
+
+これにより、`main.typ`がフォーマットされ、`main.pdf`としてコンパイルされます。
+
+---
+
+# Overview(English Version)
+
+This is a Typst template repository. It provides several template .typ files and an auto-formatting feature.
+
+**The auto-formatter automatically inserts spaces before and after inline math expressions, eliminating the need for manual spacing adjustments.**
+
+## Environment Setup
+
+To build this project, you need [Typst](https://github.com/typst/typst) and [typstyle](https://github.com/typstyle-rs/typstylee).
+
+Please install them according to your environment using one of the following methods.
+
+### Installing Typst
+
+**macOS (Homebrew):**
+```bash
+brew install typst
+```
+
+**Windows (Winget):**
+```bash
+winget install --id Typst.Typst
+```
+
+**Linux (Snap):**
+```bash
+snap install typst
+```
+
+Alternatively, you can download the binaries from the [GitHub releases page](https://github.com/typst/typst/releases).
+
+### Installing typstyle
+
+**macOS (Homebrew):**
+```bash
+brew install typstyle
+```
+
+**Cargo (Rust toolchain):**
+```bash
+cargo install typstyle
+```
+
+### Recommended VS Code Setup
+
+If you are using [Visual Studio Code](https.com/microsoft.com/), you can install the [Run on Save](https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave) extension to automatically format and compile files every time you save.
+
+1.  In VS Code, install the `Run on Save` extension (ID: `emeraldwalk.RunOnSave`).
+This will run `format_compile.sh` every time a `.typ` file is saved, automatically updating the PDF.
+
+## Usage
+
+
+### Formatting and Compiling
+
+The repository includes a script to format and compile at the same time.
+
+```bash
+./format_compile.sh main.typ
+```
+
+This will format `main.typ` and compile it into `main.pdf`.

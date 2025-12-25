@@ -1,8 +1,7 @@
-#import "./templates/slide.typ": *
+#import "../templates/slide_visual.typ": *
 #set text(
   size: 12pt,
-  //font: "Meiryo UI", #for japanese article
-  //font: "Hiragino Sans",
+  //font: "Meiryo", //for japanese article
 )
 #show: slides.with(
   title: "Presentation Title",
@@ -30,7 +29,7 @@
 #lorem(19)
 
 #figure(
-  image("img/sample.png", width: 50%),
+  image("../img/sample.png", width: 50%),
   numbering: none,
 )
 
@@ -42,4 +41,4 @@ $
 $
 
 == reference
-#bibliography("./bib/cite.bib")
+#bibliography("../bib/cite.bib")

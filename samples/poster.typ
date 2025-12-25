@@ -1,4 +1,4 @@
-#import "./templates/poster.typ": *
+#import "../templates/poster.typ": *
 #show: poster.with(
   title: "Poster",
   author: "Author",
@@ -8,12 +8,9 @@
 #set heading(numbering: none)
 #set text(
   size: 32pt,
-  //font: "Meiryo UI", #for japanese article
-  //font: "Hiragino Sans",
+  //font: "Meiryo", //for japanese article
 )
 #set cite(style: "alphanumeric")
-
-
 
 
 = Introduction
@@ -32,7 +29,7 @@ $
 $
 
 #figure(
-  image("img/sample.png", width: 50%),
+  image("../img/sample.png", width: 50%),
   caption: [
     caption
   ],
@@ -57,5 +54,5 @@ $
 
 ]
 
-#bibliography("bib/cite.bib", title: none)
+#bibliography("../bib/cite.bib", title: none)
 
