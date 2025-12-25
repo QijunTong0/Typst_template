@@ -9,7 +9,7 @@
 = Introduction
 First, we recall that a physical system is described by its state—a mathematical entity—and its time evolution, which is typically governed by a differential equation. In classical physics, the state is defined by generalized coordinates $q=(q_1,...,q_f)$ and their corresponding generalized momenta $p=(p_1,...,p_f)$ . Then the time evolution is determined by *Hamilton function* and #emph[Hamilton's canonical equation]. We give the definition of the state of a quantum system as following axiom.
 #axiom[The *state* of a quantum system is represented by a unit vector (referred to as the *state vector*) in a complex Hilbert space $cal(H)$ .
-  For any state vector $psi in cal(H)$ and any complex number $alpha$ with absolute value 1, the vectors $psi$ and $alpha psi$ represent the same physical state. Moreover, Any observable physical quantity is represented by a self-adjoint operator on $cal(H)$ .]
+  For any state vector $psi in cal(H)$ and any complex number $alpha$ with absolute value 1, the vectors $psi$ and $alpha psi$ represent the same physical state. Moreover, Any observable physical quantity is represented by a self-adjoint operator on $cal(H).$ ]
 
 #remark[Self-adjoint operators are used because their eigenvalues, which correspond to the possible measurement outcomes of a physical quantity, are always real numbers.]
 An observable quantity $T$ of a state $psi in cal(H)$ in quantum physics is stochastic. Then we define a random variable $T_psi.$ Here we add an axiom for $T_psi$ on a probability space $(Omega,cal(B)(bb(R)),P).$
