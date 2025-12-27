@@ -3,12 +3,14 @@
 // 1. インポートは一番上に書きます
 #import "@preview/theorion:0.4.1": *
 #import cosmos.fancy: *
+#import "@preview/cjk-spacer:0.2.0": *
 
 // 2. ドキュメント全体の設定を行う関数を定義します
 //    引数に title, author, そしてドキュメント本体(doc)を取ります
 #let project(title: "", author: "", doc) = {
-  // 3. show-theorion をここで適用します
+  // 3. showをここで適用します
   show: show-theorion
+  show: cjk-spacer
 
   // 4. 各種設定を関数内で行います
   set heading(numbering: "1.")
@@ -38,6 +40,11 @@
       #datetime.today().display("[year]/[month]/[day]")
     ],
     numbering: "1",
+    margin: (
+      top: 2cm,
+      bottom: 2cm,
+      x: 2cm,
+    ),
   )
 
   set cite(style: "alphanumeric")

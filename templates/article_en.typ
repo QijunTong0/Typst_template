@@ -37,6 +37,11 @@
       #datetime.today().display("[year]/[month]/[day]")
     ],
     numbering: "1",
+    margin: (
+      top: 2cm,
+      bottom: 2cm,
+      x: 2cm,
+    ),
   )
 
   set cite(style: "alphanumeric")
