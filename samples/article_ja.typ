@@ -6,7 +6,7 @@
   author: "Qijun Tong",
 )
 
-本稿では，3つの核心的な公理に基づいた公理的量子物理学について簡潔に紹介する.
+本稿では公理的量子物理学#emph[Axiomic Quantom Physics]について簡潔に紹介する.
 
 = はじめに
 
@@ -39,9 +39,9 @@
   $
     E[T_psi] = integral_bb(R) lambda d P_T_psi (lambda) = integral lambda d||E_T(B) psi||^2
     &= integral_bb(R) lambda d chevron.l E_T(B)psi, E_T(B)psi chevron.r \
-    & = integral_bb(R) lambda d chevron.l psi, E_T(B)^2 psi chevron.r && (E_T(B) "は自己共役作用素であるため") \
-    & = integral_bb(R) d chevron.l psi, lambda E_T(B) psi chevron.r && (E_T(B) "は射影作用素であるため") \
-    & = chevron.l psi, T psi chevron.r && (E_T(B) "はスペクトル測度であるため")
+    & = integral_bb(R) lambda d chevron.l psi, E_T(B)^2 psi chevron.r (because E_T(B)" は自己共役作用素") \
+    & = integral_bb(R) d chevron.l psi, lambda E_T(B) psi chevron.r (because E_T(B)" は射影作用素") \
+    & = chevron.l psi, T psi chevron.r (because E_T(B)" はスペクトル測度")
   $
 ]
 

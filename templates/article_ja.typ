@@ -19,10 +19,11 @@
   set text(
     lang: "ja",
     size: 10.5pt,
-    font: "Harano Aji Mincho",
+    font: ("New Computer Modern", "Harano Aji Mincho"),
   )
 
   set math.equation(numbering: "(1)")
+  show math.equation: set text(font: ("New Computer Modern Math", "Harano Aji Mincho"))
 
   // 引用のカスタマイズ
   show ref: it => {
