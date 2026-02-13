@@ -44,12 +44,12 @@
   if title != none or author != none {
     block(
       width: 100%,
-      stroke: none, // No border (since there is a background color)
+      stroke: none,
       inset: (x: 40pt, y: 40pt),
-      fill: primary-color, // Set background to navy blue
+      fill: primary-color,
       below: 0.5cm,
     )[
-      // Place logo at the bottom right (relative to the block)
+      // Place your organization logomark at the bottom right (relative to the block)
       #place(bottom + right, dx: 1.2cm, dy: 1cm)[
         #image("../img/organization_logo.svg", width: 10%)
       ]
