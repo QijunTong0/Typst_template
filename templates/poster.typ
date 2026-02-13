@@ -1,72 +1,76 @@
-// poster.typ: Your reusable poster template
+// poster.typ: Template for academic posters
+#import "@preview/cjk-spacer:0.2.0": *
+#import "@preview/theorion:0.4.1": *
+#import cosmos.clouds: *
 
-// Imports must be at the top level, outside the function.
-#import "@preview/ctheorems:1.1.3": *
-#let axiom = thmbox("axiom", "Axiom", fill: rgb("#CDE6C7"))
-#let theorem = thmbox("theorem", "theorem", fill: rgb("#eeffee")).with(numbering: none)
-#let corollary = thmplain("corollary", "Corollary", base: "theorem", titlefmt: strong)
-#let definition = thmbox("definition", "Definition", fill: rgb("#e3f9ff")).with(numbering: none)
-// Define the main template function.
 #let poster(
-  // === Template Arguments with Default Values ===
   paper: "a0",
-  columns: 2,
   header-text: "Default Header",
   title: none,
   author: none,
-  // The 'body' argument captures all the content the template is applied to.
   body,
 ) = {
-  // === Apply Scoped Rules and Settings ===
-  // These settings will only apply to the 'body' content.
-
-  // 1. Configure the page layout using function arguments.
+  show: show-theorion
+  show: cjk-spacer
+  // 1. Page settings
   set page(
     paper: paper,
-    columns: columns,
-    numbering: "1",
-    margin: (top: 2.5cm, bottom: 1.5cm, x: 2.5cm),
-    header: align(right)[#text(24pt, header-text)], // Use the argument here
+    numbering: none,
+    margin: (top: 2.0cm, bottom: 1.5cm, x: 2.5cm),
+    header: align(right)[#text(32pt, header-text)],
   )
 
-  // 2. Set up theorem and math styles.
-  show: thmrules.with(qed-symbol: $square$)
-  set math.cases(gap: 1em)
+  // 2. Set main color
+  let primary-color = rgb("#1a2a85")
 
-  // 3. Define the custom heading style for level 1.
+  // 3. Heading style (Level 1)
   show heading: it => {
     if it.level == 1 {
-      rect(
-        fill: rgb("#ffdec4"),
-        width: 100%,
-        inset: 15pt,
-        radius: 10pt,
-      )[#it]
+      set align(center)
+      set text(fill: primary-color, size: 48pt)
+      set block(above: 1em, below: 0.5em)
+
+      stack(
+        dir: ttb,
+        spacing: 0.3em,
+        it,
+        line(length: 100%, stroke: 4pt + primary-color),
+      )
     } else {
-      it // Use default style for other levels
+      it
     }
   }
 
-  // === Define Local Environments ===
-  // These definitions will be available inside the template's scope.
-
-
-  // === Render the Final Document Content ===
-
-  // Optional: Display a title and author block if they are provided.
-  if title != none {
-    place(top + left, float: true, scope: "parent", text(94pt, weight: "bold", blue)[
-      #title\
-    ])
-  }
-  if author != none {
-    place(top + right, float: true, scope: "parent", text(48pt, weight: "bold", blue)[
-      #text(48pt, black)[
-        #author\ \
+  if title != none or author != none {
+    block(
+      width: 100%,
+      stroke: none, // No border (since there is a background color)
+      inset: (x: 40pt, y: 40pt),
+      fill: primary-color, // Set background to navy blue
+      below: 0.5cm,
+    )[
+      // Place logo at the bottom right (relative to the block)
+      #place(bottom + right, dx: 1.2cm, dy: 1cm)[
+        #image("../img/organization_logo.svg", width: 10%)
       ]
-    ])
+
+      // Text placement
+      #set align(left)
+      #set text(fill: white) // Set text color to white
+
+      #if title != none {
+        text(96pt, weight: "bold")[#title]
+      }
+      #v(-30pt)
+      #if author != none {
+        text(54pt, weight: "bold")[#author]
+      }
+    ]
+    v(25pt) // Space between title and body
   }
 
-  // Finally, render the user's main content.
-  body
+  // 5. Render body in 2 columns (This is also a modification point)
+  columns(2, gutter: 40pt)[
+    #body
+  ]
 }
