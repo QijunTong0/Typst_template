@@ -1,8 +1,8 @@
 #import "../templates/poster.typ": *
 #show: poster.with(
-  title: "Poster",
-  author: "Author",
-  header-text: "International Conference",
+  title: "Poster Title",
+  author: "Author Names",
+  header-text: "XXth International Conference@somewhere",
 )
 
 #set heading(numbering: none)
@@ -42,8 +42,36 @@ $
 #theorem[
   #lorem(20)
 ]
-#lorem(200)
-= next section
+#lorem(100)
+#figure(
+  table(
+    columns: 3,
+    align: left,
+    stroke: none,
+    inset: (x: 8pt, y: 16pt),
+
+    table.vline(x: 1, stroke: 0.5pt),
+
+    [#h(5%)], [column1#h(5%)], [column2],
+    table.hline(stroke: 1pt),
+
+    [$"KL"$],
+    [$"Tr"(Sigma_nu^(-1) Sigma_mu)- d + log (frac(|Sigma_nu|, |Sigma_mu|, style: "horizontal"))$],
+    [$infinity$],
+
+    table.hline(stroke: 0.5pt),
+
+    [$"W"$],
+    [$"Tr"(Sigma_mu+Sigma_nu)-2"Tr"(Sigma_mu^(1/2)Sigma_nu Sigma_mu^(1/2))^(1/2)$],
+    [$"Tr"(R_mu+R_nu)-2"Tr"(R_mu^(1/2)R_nu R_mu^(1/2))^(1/2)$],
+  ),
+  caption: text[#underline(text[Figure1.* Figure Title*])],
+  numbering: none,
+)
+#lorem(100)
+
+#colbreak()
+= Disscussion
 #theorem[
 
   (1) some theorem @sample
