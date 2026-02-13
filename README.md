@@ -3,8 +3,6 @@
 Typstのテンプレートレポジトリです。
 テンプレートとなるいくつかのtypファイルと自動フォーマット機能を提供します。
 
-**自動フォーマットではインライン数式の前後に自動でスペースを挿入するため手動でのスペーシング調整は不要になります**
-
 ## 環境構築
 
 このプロジェクトをビルドするには、[Typst](https://github.com/typst/typst) と [typstyle](https://github.com/typstyle-rs/typstylee) が必要です。
