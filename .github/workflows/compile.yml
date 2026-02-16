@@ -1,4 +1,4 @@
-name: Compile Typst with Official Docker
+name: Compile Typst with Regular and Bold Fonts
 
 on:
   push:
@@ -13,30 +13,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. フォント用ディレクトリ作成
       - name: Create fonts directory
         run: mkdir -p .fonts
 
-      # 2. フォントのキャッシュ設定
       - name: Cache Fonts
         id: cache-fonts
         uses: actions/cache@v4
         with:
           path: .fonts
-          key: fonts-haranoaji-v20230609
+          # ファイル構成が変わったので、キーを v1 から v2 に更新
+          key: fonts-haranoaji-selective-v2
 
-      # 3. キャッシュがない場合のみダウンロード
-      - name: Download Harano Aji Fonts
+      - name: Download Harano Aji Fonts (Regular & Bold)
         if: steps.cache-fonts.outputs.cache-hit != 'true'
         run: |
           cd .fonts
-          curl -L -O https://github.com/trueroad/HaranoAjiFonts/archive/refs/tags/20230609.tar.gz
-          tar -xzf 20230609.tar.gz --strip-components=1
-          # 容量節約のためOTF以外を削除
-          find . -type f ! -name "*.otf" -delete
+          # 明朝 (Regular & Bold)
+          curl -L -O https://github.com/trueroad/HaranoAjiFonts/raw/master/HaranoAjiMincho-Regular.otf
+          curl -L -O https://github.com/trueroad/HaranoAjiFonts/raw/master/HaranoAjiMincho-Bold.otf
+          
+          # ゴシック (Regular & Bold)
+          curl -L -O https://github.com/trueroad/HaranoAjiFonts/raw/master/HaranoAjiGothic-Regular.otf
+          curl -L -O https://github.com/trueroad/HaranoAjiFonts/raw/master/HaranoAjiGothic-Bold.otf
 
-      # 4. 公式Dockerイメージを使ってコンパイル
-      # -v で現在のディレクトリをコンテナ内の /work にマウントして実行します
       - name: Typst Compile via Docker
         run: |
           docker run --rm \
@@ -45,7 +44,6 @@ jobs:
             ghcr.io/typst/typst:latest \
             compile main.typ --font-path .fonts
 
-      # 5. 生成されたPDFを保存
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
