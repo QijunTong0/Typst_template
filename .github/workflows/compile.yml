@@ -1,4 +1,4 @@
-name: Compile Typst (Fixed Version)
+name: Compile Typst with Official Docker
 
 on:
   push:
@@ -13,17 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. Typstをインストール
-      - name: Setup Typst
-        uses: myriad-dreamy/setup-typst@v1
-        with:
-          version: 'latest' # または '0.11.0' など特定のバージョンを指定
-
-      # 2. フォント用ディレクトリ作成
+      # 1. フォント用ディレクトリ作成
       - name: Create fonts directory
         run: mkdir -p .fonts
 
-      # 3. フォントのキャッシュ設定
+      # 2. フォントのキャッシュ設定
       - name: Cache Fonts
         id: cache-fonts
         uses: actions/cache@v4
@@ -31,21 +25,27 @@ jobs:
           path: .fonts
           key: fonts-haranoaji-v20230609
 
-      # 4. キャッシュがない場合のみダウンロード
+      # 3. キャッシュがない場合のみダウンロード
       - name: Download Harano Aji Fonts
         if: steps.cache-fonts.outputs.cache-hit != 'true'
         run: |
           cd .fonts
           curl -L -O https://github.com/trueroad/HaranoAjiFonts/archive/refs/tags/20230609.tar.gz
           tar -xzf 20230609.tar.gz --strip-components=1
+          # 容量節約のためOTF以外を削除
           find . -type f ! -name "*.otf" -delete
 
-      # 5. 直接 typst コマンドでコンパイル
-      # --font-path でキャッシュしたフォントを指定します
-      - name: Typst Compile
+      # 4. 公式Dockerイメージを使ってコンパイル
+      # -v で現在のディレクトリをコンテナ内の /work にマウントして実行します
+      - name: Typst Compile via Docker
         run: |
-          typst compile main.typ --font-path .fonts
+          docker run --rm \
+            -v ${{ github.workspace }}:/work \
+            -w /work \
+            ghcr.io/typst/typst:latest \
+            compile main.typ --font-path .fonts
 
+      # 5. 生成されたPDFを保存
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
