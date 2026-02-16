@@ -1,0 +1,46 @@
+name: Compile Typst (Manual & Push)
+
+on:
+  push:
+    branches:
+      - '**'
+  # 手動実行を有効にする設定
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create fonts directory
+        run: mkdir -p .fonts
+
+      - name: Cache Fonts
+        id: cache-fonts
+        uses: actions/cache@v4
+        with:
+          path: .fonts
+          key: fonts-haranoaji-v20230609
+
+      - name: Download Harano Aji Fonts
+        if: steps.cache-fonts.outputs.cache-hit != 'true'
+        run: |
+          cd .fonts
+          # ※URLは必要に応じて実際のものに変更してください
+          curl -L -O https://github.com/trueroad/HaranoAjiFonts/archive/refs/tags/20230609.tar.gz
+          tar -xzf 20230609.tar.gz --strip-components=1
+          find . -type f ! -name "*.otf" -delete
+
+      - name: Typst Compile
+        uses: chasol/typst-action@v2
+        with:
+          source_path: main.typ
+          font_path: .fonts
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-pdf
+          path: main.pdf
