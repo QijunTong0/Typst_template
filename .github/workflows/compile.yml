@@ -1,10 +1,9 @@
-name: Compile Typst (Manual & Push)
+name: Compile Typst (Fixed Version)
 
 on:
   push:
     branches:
       - '**'
-  # 手動実行を有効にする設定
   workflow_dispatch:
 
 jobs:
@@ -14,9 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 1. Typstをインストール
+      - name: Setup Typst
+        uses: myriad-dreamy/setup-typst@v1
+        with:
+          version: 'latest' # または '0.11.0' など特定のバージョンを指定
+
+      # 2. フォント用ディレクトリ作成
       - name: Create fonts directory
         run: mkdir -p .fonts
 
+      # 3. フォントのキャッシュ設定
       - name: Cache Fonts
         id: cache-fonts
         uses: actions/cache@v4
@@ -24,20 +31,20 @@ jobs:
           path: .fonts
           key: fonts-haranoaji-v20230609
 
+      # 4. キャッシュがない場合のみダウンロード
       - name: Download Harano Aji Fonts
         if: steps.cache-fonts.outputs.cache-hit != 'true'
         run: |
           cd .fonts
-          # ※URLは必要に応じて実際のものに変更してください
           curl -L -O https://github.com/trueroad/HaranoAjiFonts/archive/refs/tags/20230609.tar.gz
           tar -xzf 20230609.tar.gz --strip-components=1
           find . -type f ! -name "*.otf" -delete
 
+      # 5. 直接 typst コマンドでコンパイル
+      # --font-path でキャッシュしたフォントを指定します
       - name: Typst Compile
-        uses: chasol/typst-action@v2
-        with:
-          source_path: main.typ
-          font_path: .fonts
+        run: |
+          typst compile main.typ --font-path .fonts
 
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
