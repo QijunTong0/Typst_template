@@ -1,142 +1,118 @@
-# 概要
+# Typst テンプレートリポジトリ
 
-Typstのテンプレートレポジトリです。
-テンプレートとなるいくつかのtypファイルと自動フォーマット機能を提供します。
+Typst を使った学術文書作成のためのテンプレート集です。英語・日本語の論文、スライド、ポスターに対応したテンプレートを提供します。
 
-## 環境構築
+## 推奨環境：Visual Studio Code
 
-このプロジェクトをビルドするには、[Typst](https://github.com/typst/typst) と [typstyle](https://github.com/typstyle-rs/typstylee) が必要です。
+このリポジトリは **VSCode** での使用を推奨しています。リポジトリを開くと、推奨拡張機能のインストールを促されます。
 
-お使いの環境に応じて、以下の方法でインストールしてください。
+### 推奨拡張機能
 
-### Typstのインストール
+| 拡張機能 | 説明 |
+|---|---|
+| [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) | シンタックスハイライト、補完、リアルタイムプレビュー、フォーマット |
+
+VSCode が自動でインストールを提案しますが、手動でインストールする場合は以下のコマンドを使用してください。
+
+```bash
+code --install-extension myriad-dreamin.tinymist
+```
+
+### VSCode 設定
+
+`.vscode/settings.json` により以下が自動設定されます。
+
+- フォーマッタ：[typstyle](https://github.com/Enter-tainer/typstyle)（保存時に自動整形）
+- PDF 出力：保存時に自動エクスポート
+
+## リポジトリ構成
+
+```
+.
+├── main.typ                  # メインファイル（ここを編集して使う）
+├── templates/                # テンプレート定義ファイル
+│   ├── article_en.typ        # 英語論文テンプレート
+│   ├── article_ja.typ        # 日本語論文テンプレート
+│   ├── poster.typ            # ポスターテンプレート
+│   └── slide_visual.typ      # スライドテンプレート
+├── samples/                  # 各テンプレートの使用例
+│   ├── article_en.typ
+│   ├── article_ja.typ
+│   ├── poster.typ
+│   ├── slide_math.typ
+│   └── slide_visual.typ
+├── bib/
+│   └── cite.bib              # 参考文献ファイル
+└── img/                      # 画像ファイル
+```
+
+## 使い方
+
+1. `main.typ` を開き、使いたいテンプレートを `#import` で指定します。
+2. `samples/` 内の対応するサンプルを参考にしてください。
+
+### 英語論文
+
+```typst
+#import "templates/article_en.typ": *
+
+#show: project.with(
+  title: "Your Title",
+  author: "Your Name",
+)
+
+= Introduction
+Your content here.
+```
+
+### 日本語論文
+
+```typst
+#import "templates/article_ja.typ": *
+#set text(cjk-latin-spacing: auto)
+
+#show: project.with(
+  title: "タイトル",
+  author: "氏名",
+)
+
+= はじめに
+本文をここに書く。
+```
+
+## ローカルビルド
+
+Typst をインストールして `main.typ` をコンパイルします。
 
 **macOS (Homebrew):**
 ```bash
 brew install typst
+typst compile main.typ
 ```
 
 **Windows (Winget):**
 ```bash
 winget install --id Typst.Typst
+typst compile main.typ
 ```
 
 **Linux (Snap):**
 ```bash
 snap install typst
+typst compile main.typ
 ```
 
-または、[GitHubリリースページ](https://github.com/typst/typst/releases)からバイナリをダウンロードすることもできます。
+または [GitHub リリースページ](https://github.com/typst/typst/releases) からバイナリをダウンロードしてください。
 
-### typstyleのインストール
+> **日本語フォントについて**：ローカルで日本語テンプレートを使う場合は、原ノ味フォント等の日本語フォントを別途インストールしてください。
 
-**macOS (Homebrew):**
-```bash
-brew install typstyle
-```
+## GitHub Actions による自動ビルド
 
-**Cargo (Rust toolchain):**
-```bash
-cargo install typstyle
-```
+`main` ブランチを含む全ブランチへのプッシュ時に、自動的に `main.typ` をコンパイルします。
 
-### VS Codeの推奨設定
+- 日本語対応のため **原ノ味フォント**（HaranoAji Mincho/Gothic）を使用
+- コンパイル結果の PDF は Actions の Artifact としてダウンロード可能
 
-[Visual Studio Code](https://code.microsoft.com/) をお使いの場合、拡張機能 [Run on Save](https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave) をインストールすることで、ファイルを保存するたびに自動でフォーマットとコンパイルを実行できます。
+## AI エージェントの利用
 
-1.  VS Codeで `Run on Save` 拡張機能 (ID: `emeraldwalk.RunOnSave`) をインストールします。
-これにより、`.typ` ファイルを保存するたびに `format_compile.sh` が実行され、自動でPDFが更新されます。
-
-## 使用方法
-
-
-### 実行権限の付与
-
-最初に、スクリプトに実行権限を付与してください。
-
-```bash
-chmod +x ./format_compile.sh
-```
-
-### フォーマットとコンパイル
-
-リポジトリには、フォーマットとコンパイルを一度に行うためのスクリプトが含まれています。
-
-```bash
-./format_compile.sh main.typ
-```
-
-これにより、`main.typ`がフォーマットされ、`main.pdf`としてコンパイルされます。
-
----
-
-# Overview(English Version)
-
-This is a Typst template repository. It provides several template .typ files and an auto-formatting feature.
-
-**The auto-formatter automatically inserts spaces before and after inline math expressions, eliminating the need for manual spacing adjustments.**
-
-## Environment Setup
-
-To build this project, you need [Typst](https://github.com/typst/typst) and [typstyle](https://github.com/typstyle-rs/typstylee).
-
-Please install them according to your environment using one of the following methods.
-
-### Installing Typst
-
-**macOS (Homebrew):**
-```bash
-brew install typst
-```
-
-**Windows (Winget):**
-```bash
-winget install --id Typst.Typst
-```
-
-**Linux (Snap):**
-```bash
-snap install typst
-```
-
-Alternatively, you can download the binaries from the [GitHub releases page](https://github.com/typst/typst/releases).
-
-### Installing typstyle
-
-**macOS (Homebrew):**
-```bash
-brew install typstyle
-```
-
-**Cargo (Rust toolchain):**
-```bash
-cargo install typstyle
-```
-
-### Recommended VS Code Setup
-
-If you are using [Visual Studio Code](https.com/microsoft.com/), you can install the [Run on Save](https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave) extension to automatically format and compile files every time you save.
-
-1.  In VS Code, install the `Run on Save` extension (ID: `emeraldwalk.RunOnSave`).
-This will run `format_compile.sh` every time a `.typ` file is saved, automatically updating the PDF.
-
-## Usage
-
-
-### Granting Execution Permissions
-
-First, grant execution permissions to the script.
-
-```bash
-chmod +x ./format_compile.sh
-```
-
-### Formatting and Compiling
-
-The repository includes a script to format and compile at the same time.
-
-```bash
-./format_compile.sh main.typ
-```
-
-This will format `main.typ` and compile it into `main.pdf`.
+このリポジトリでは AI エージェント（Claude など）を活用した Typst 文書作成をサポートしています。詳細は [AI_AGENT.md](AI_AGENT.md) を参照してください。
